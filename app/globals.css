@@ -23,3 +23,64 @@ body {
   background: #fff;
   color: #000;
 }
+
+/* =========================================
+   SKILLS MARQUEE
+========================================= */
+
+.skills-row {
+  display: flex;
+  width: max-content;
+  gap: 0;
+  will-change: transform;
+}
+
+.skills-track {
+  display: flex;
+  width: max-content;
+  flex-shrink: 0;
+  gap: 3px;
+  padding-right: 3px;
+}
+
+/* LEFT */
+
+.skills-row-left {
+  animation: skills-left 28s linear infinite;
+}
+
+/* RIGHT */
+
+.skills-row-right {
+  animation: skills-right 28s linear infinite;
+}
+
+
+/* =========================================
+   LEFT ANIMATION
+========================================= */
+
+@keyframes skills-left {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+
+/* =========================================
+   RIGHT ANIMATION
+========================================= */
+
+@keyframes skills-right {
+  from {
+    transform: translateX(-50%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}

@@ -1,40 +1,103 @@
 "use client";
 
-import { motion } from "framer-motion";
+import {
+  motion,
+  useScroll,
+  useTransform,
+} from "framer-motion";
+import { useRef } from "react";
+
 import MoltenMetal from "./MoltenMetal";
 import TiltedCard from "./TiltedCard";
 
 export default function Home() {
+  const homeRef = useRef<HTMLElement | null>(null);
+
+  /*
+    Scroll progress khusus untuk Home.
+
+    0   = bagian atas Home
+    1   = bagian bawah Home sudah meninggalkan viewport
+  */
+  const { scrollYProgress } = useScroll({
+    target: homeRef,
+    offset: ["start start", "end start"],
+  });
+
+  /*
+    Purple glow akan sedikit muncul,
+    kemudian menghilang ketika masuk About.
+  */
+  const transitionGlowOpacity = useTransform(
+    scrollYProgress,
+    [0.55, 0.72, 1],
+    [0.15, 0.3, 0]
+  );
+
+  const transitionGlowScale = useTransform(
+    scrollYProgress,
+    [0.55, 0.8, 1],
+    [0.8, 1.2, 1.5]
+  );
+
+  /*
+    Fade bagian bawah Home.
+  */
+  const transitionFadeOpacity = useTransform(
+    scrollYProgress,
+    [0.55, 0.85, 1],
+    [0.2, 0.8, 1]
+  );
+
   return (
     <motion.section
+      ref={homeRef}
       id="home"
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
+      initial={{
+        opacity: 0,
+        y: 20,
+      }}
+      whileInView={{
+        opacity: 1,
+        y: 0,
+      }}
+      viewport={{
+        once: true,
+        amount: 0.2,
+      }}
+      transition={{
+        duration: 0.8,
+        ease: "easeOut",
+      }}
       className="
         relative
         flex
         min-h-screen
         items-center
         overflow-hidden
-        bg-white
+        bg-black
         px-5
         py-24
-        text-black
-        transition-colors
-        duration-500
-        dark:bg-black
-        dark:text-white
+        text-white
         sm:px-8
         lg:px-12
         xl:px-16
       "
     >
-      {/* =========================================
+      {/* =====================================================
           MOLTEN METAL BACKGROUND
-      ========================================= */}
-      <div className="pointer-events-none absolute inset-0 z-0 h-full w-full">
+      ====================================================== */}
+
+      <div
+        className="
+          pointer-events-none
+          absolute
+          inset-0
+          z-0
+          h-full
+          w-full
+        "
+      >
         <MoltenMetal
           color1="#4b00fa"
           color2="#e90be2"
@@ -57,23 +120,38 @@ export default function Home() {
         />
       </div>
 
-      {/* =========================================
-          OVERLAY
-      ========================================= */}
+      {/* =====================================================
+          DARK OVERLAY
+      ====================================================== */}
+
       <div
         className="
           pointer-events-none
           absolute
           inset-0
           z-[1]
-          bg-white/70
-          dark:bg-black/40
+          bg-black/40
         "
       />
 
-      {/* =========================================
+      {/* =====================================================
+          EXTRA VIGNETTE
+      ====================================================== */}
+
+      <div
+        className="
+          pointer-events-none
+          absolute
+          inset-0
+          z-[2]
+          bg-[radial-gradient(circle_at_center,transparent_20%,rgba(0,0,0,0.45)_100%)]
+        "
+      />
+
+      {/* =====================================================
           MAIN CONTENT
-      ========================================= */}
+      ====================================================== */}
+
       <div
         className="
           relative
@@ -83,9 +161,10 @@ export default function Home() {
           max-w-[1500px]
         "
       >
-        {/* =========================================
+        {/* ===================================================
             MAIN GRID
-        ========================================= */}
+        ==================================================== */}
+
         <div
           className="
             grid
@@ -98,9 +177,10 @@ export default function Home() {
             xl:gap-16
           "
         >
-          {/* =====================================
+          {/* =================================================
               LEFT CONTENT
-          ===================================== */}
+          ================================================== */}
+
           <motion.div
             initial={{
               opacity: 0,
@@ -123,6 +203,7 @@ export default function Home() {
             "
           >
             {/* LABEL */}
+
             <motion.p
               initial={{
                 opacity: 0,
@@ -143,14 +224,14 @@ export default function Home() {
                 uppercase
                 tracking-[0.35em]
                 text-neutral-500
-                dark:text-neutral-400
                 sm:text-[11px]
               "
             >
-              Software Developer
+              Frontend Developer
             </motion.p>
 
             {/* NAME */}
+
             <motion.h1
               initial={{
                 opacity: 0,
@@ -183,8 +264,7 @@ export default function Home() {
 
               <span
                 className="
-                  text-neutral-400
-                  dark:text-neutral-600
+                  text-neutral-600
                 "
               >
                 Prayoga
@@ -192,6 +272,7 @@ export default function Home() {
             </motion.h1>
 
             {/* DESCRIPTION */}
+
             <motion.p
               initial={{
                 opacity: 0,
@@ -211,8 +292,7 @@ export default function Home() {
                 max-w-lg
                 text-sm
                 leading-6
-                text-neutral-600
-                dark:text-neutral-400
+                text-neutral-400
                 sm:mt-9
                 sm:text-base
                 sm:leading-7
@@ -225,6 +305,7 @@ export default function Home() {
             </motion.p>
 
             {/* BUTTONS */}
+
             <motion.div
               initial={{
                 opacity: 0,
@@ -248,42 +329,13 @@ export default function Home() {
               "
             >
               {/* VIEW PROJECTS */}
+
               <a
                 href="#projects"
                 className="
                   border
-                  border-black
-                  bg-black
-                  px-5
-                  py-3.5
-                  text-[10px]
-                  font-semibold
-                  uppercase
-                  tracking-[0.2em]
-                  text-white
-                  transition-all
-                  duration-300
-                  hover:-translate-y-1
-                  hover:bg-white
-                  hover:text-black
-                  dark:border-white
-                  dark:bg-white
-                  dark:text-black
-                  dark:hover:bg-black
-                  dark:hover:text-white
-                  sm:px-6
-                  sm:text-[11px]
-                "
-              >
-                View Projects
-              </a>
-
-              {/* ABOUT */}
-              <a
-                href="#about"
-                className="
-                  border
-                  border-black/15
+                  border-white
+                  bg-white
                   px-5
                   py-3.5
                   text-[10px]
@@ -294,10 +346,34 @@ export default function Home() {
                   transition-all
                   duration-300
                   hover:-translate-y-1
-                  hover:border-black
-                  dark:border-white/15
-                  dark:text-white
-                  dark:hover:border-white
+                  hover:bg-transparent
+                  hover:text-white
+                  sm:px-6
+                  sm:text-[11px]
+                "
+              >
+                View Projects
+              </a>
+
+              {/* ABOUT */}
+
+              <a
+                href="#about"
+                className="
+                  border
+                  border-white/15
+                  px-5
+                  py-3.5
+                  text-[10px]
+                  font-semibold
+                  uppercase
+                  tracking-[0.2em]
+                  text-white
+                  transition-all
+                  duration-300
+                  hover:-translate-y-1
+                  hover:border-white
+                  hover:bg-white/5
                   sm:px-6
                   sm:text-[11px]
                 "
@@ -307,9 +383,10 @@ export default function Home() {
             </motion.div>
           </motion.div>
 
-          {/* =====================================
+          {/* =================================================
               CENTER PHOTO
-          ===================================== */}
+          ================================================== */}
+
           <motion.div
             initial={{
               opacity: 0,
@@ -345,10 +422,10 @@ export default function Home() {
                 imageSrc="/profile.png"
                 altText="Rafly Prayoga"
                 captionText="Rafly Prayoga"
-                containerHeight="460px"
-                containerWidth="460px"
-                imageHeight="460px"
-                imageWidth="460px"
+                containerHeight="560px"
+                containerWidth="400px"
+                imageHeight="560px"
+                imageWidth="400px"
                 rotateAmplitude={12}
                 scaleOnHover={1.06}
                 showMobileWarning={false}
@@ -358,9 +435,10 @@ export default function Home() {
             </div>
           </motion.div>
 
-          {/* =====================================
+          {/* =================================================
               RIGHT CONTENT
-          ===================================== */}
+          ================================================== */}
+
           <motion.div
             initial={{
               opacity: 0,
@@ -383,15 +461,15 @@ export default function Home() {
               xl:pl-8
             "
           >
-            {/* =================================
+            {/* =================================================
                 CURRENTLY
-            ================================= */}
+            ================================================== */}
+
             <div
               className="
                 border-t
-                border-black/10
+                border-white/10
                 pt-5
-                dark:border-white/10
               "
             >
               <motion.span
@@ -411,7 +489,7 @@ export default function Home() {
                   text-[9px]
                   uppercase
                   tracking-[0.3em]
-                  text-neutral-400
+                  text-neutral-500
                   sm:text-[10px]
                 "
               >
@@ -419,6 +497,7 @@ export default function Home() {
               </motion.span>
 
               {/* TITLE */}
+
               <motion.h2
                 initial={{
                   opacity: 0,
@@ -442,12 +521,13 @@ export default function Home() {
                   md:text-4xl
                 "
               >
-                Software
+                Frontend
                 <br />
                 Developer
               </motion.h2>
 
               {/* DESCRIPTION */}
+
               <motion.p
                 initial={{
                   opacity: 0,
@@ -467,7 +547,6 @@ export default function Home() {
                   text-sm
                   leading-6
                   text-neutral-500
-                  dark:text-neutral-400
                 "
               >
                 Turning ideas into functional, scalable, and
@@ -475,16 +554,16 @@ export default function Home() {
               </motion.p>
             </div>
 
-            {/* =================================
+            {/* =================================================
                 FOCUS
-            ================================= */}
+            ================================================== */}
+
             <div
               className="
                 mt-9
                 border-t
-                border-black/10
+                border-white/10
                 pt-5
-                dark:border-white/10
                 sm:mt-10
               "
             >
@@ -505,7 +584,7 @@ export default function Home() {
                   text-[9px]
                   uppercase
                   tracking-[0.3em]
-                  text-neutral-400
+                  text-neutral-500
                   sm:text-[10px]
                 "
               >
@@ -542,21 +621,17 @@ export default function Home() {
                     }}
                     className="
                       border
-                      border-black/10
+                      border-white/10
                       px-3
                       py-2
                       text-[9px]
                       uppercase
                       tracking-[0.18em]
-                      text-neutral-500
+                      text-neutral-400
                       transition-all
                       duration-300
-                      hover:border-black
-                      hover:text-black
-                      dark:border-white/10
-                      dark:text-neutral-400
-                      dark:hover:border-white
-                      dark:hover:text-white
+                      hover:border-white
+                      hover:text-white
                     "
                   >
                     {item}
@@ -565,9 +640,10 @@ export default function Home() {
               </div>
             </div>
 
-            {/* =================================
+            {/* =================================================
                 LOCATION
-            ================================= */}
+            ================================================== */}
+
             <motion.div
               initial={{
                 opacity: 0,
@@ -593,7 +669,7 @@ export default function Home() {
                     text-[9px]
                     uppercase
                     tracking-[0.3em]
-                    text-neutral-400
+                    text-neutral-500
                   "
                 >
                   Based in
@@ -604,8 +680,7 @@ export default function Home() {
                     mt-2
                     text-sm
                     font-medium
-                    text-neutral-700
-                    dark:text-neutral-300
+                    text-neutral-300
                   "
                 >
                   Indonesia
@@ -615,9 +690,10 @@ export default function Home() {
           </motion.div>
         </div>
 
-        {/* =========================================
+        {/* =====================================================
             BOTTOM INFO
-        ========================================= */}
+        ====================================================== */}
+
         <motion.div
           initial={{
             opacity: 0,
@@ -634,9 +710,8 @@ export default function Home() {
           className="
             mt-14
             border-t
-            border-black/10
+            border-white/10
             pt-6
-            dark:border-white/10
             sm:mt-16
           "
         >
@@ -648,7 +723,7 @@ export default function Home() {
               text-[9px]
               uppercase
               tracking-[0.25em]
-              text-neutral-400
+              text-neutral-500
               sm:flex
               sm:flex-wrap
               sm:items-center
@@ -684,6 +759,76 @@ export default function Home() {
             ))}
           </div>
         </motion.div>
+      </div>
+
+      {/* =====================================================
+          HOME → ABOUT TRANSITION
+      ====================================================== */}
+
+      <div
+        className="
+          pointer-events-none
+          absolute
+          bottom-0
+          left-0
+          z-30
+          h-56
+          w-full
+          overflow-hidden
+        "
+      >
+        {/* PURPLE AMBIENT GLOW */}
+
+        <motion.div
+          style={{
+            opacity: transitionGlowOpacity,
+            scale: transitionGlowScale,
+          }}
+          className="
+            absolute
+            bottom-[-150px]
+            left-1/2
+            h-72
+            w-[60%]
+            -translate-x-1/2
+            rounded-full
+            bg-purple-700/25
+            blur-[120px]
+          "
+        />
+
+        {/* MAIN FADE */}
+
+        <motion.div
+          style={{
+            opacity: transitionFadeOpacity,
+          }}
+          className="
+            absolute
+            inset-0
+            bg-gradient-to-b
+            from-transparent
+            via-black/70
+            to-black
+          "
+        />
+
+        {/* EXTRA SOFT PURPLE LINE */}
+
+        <div
+          className="
+            absolute
+            bottom-0
+            left-1/2
+            h-px
+            w-[70%]
+            -translate-x-1/2
+            bg-gradient-to-r
+            from-transparent
+            via-purple-500/20
+            to-transparent
+          "
+        />
       </div>
     </motion.section>
   );
