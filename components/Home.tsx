@@ -227,7 +227,7 @@ export default function Home() {
                 sm:text-[11px]
               "
             >
-              Frontend Developer
+              Fullstak Developer
             </motion.p>
 
             {/* NAME */}
@@ -299,9 +299,7 @@ export default function Home() {
                 md:text-lg
               "
             >
-              I build digital experiences that combine thoughtful
-              design, modern technology, and meaningful user
-              experiences.
+              merancang dan mengembangkan solusi digital yang memadukan keindahan visual, performa tinggi, dan kenyamanan pengguna.
             </motion.p>
 
             {/* BUTTONS */}
@@ -521,7 +519,7 @@ export default function Home() {
                   md:text-4xl
                 "
               >
-                Frontend
+                Fullstack
                 <br />
                 Developer
               </motion.h2>
@@ -549,8 +547,7 @@ export default function Home() {
                   text-neutral-500
                 "
               >
-                Turning ideas into functional, scalable, and
-                visually refined digital products.
+                Mengubah ide menjadi produk digital yang berfungsi baik, fleksibel, dan tampil elegan.
               </motion.p>
             </div>
 
@@ -600,9 +597,8 @@ export default function Home() {
                 "
               >
                 {[
-                  "Frontend",
-                  "Backend",
-                  "Web Apps",
+                  "Mobile",
+                  "Fullstack",
                   "Software",
                 ].map((item, index) => (
                   <motion.span
@@ -734,8 +730,8 @@ export default function Home() {
             "
           >
             {[
-              "Frontend Developer",
-              "Backend Developer",
+              "Fullstak Developer",
+              "Mobile Developer",
               "Software Developer",
               "2026",
             ].map((item, index) => (

@@ -437,8 +437,7 @@ export default function About() {
                 </div>
 
                 <p className="mt-3 text-[12px] leading-5 text-white/30">
-                  Developer, student, and someone who likes turning ideas
-                  into working software.
+                  Developer dan mahasiswa yang fokus mewujudkan ide menjadi app dan web.
                 </p>
               </div>
             </aside>
@@ -561,8 +560,7 @@ export default function About() {
                         </h2>
 
                         <p className="mt-4 text-sm text-white/40">
-                          Informatics student and developer, based in
-                          Indonesia
+                          Mahasiswa informatika dan developer
                         </p>
                       </div>
                     </div>
@@ -586,12 +584,7 @@ export default function About() {
                             sm:text-base
                           "
                         >
-                          I&apos;m an Informatics student who enjoys
-                          working across the stack — from the interface
-                          someone actually touches, to the systems
-                          running quietly behind it. I like taking a
-                          rough idea and shaping it into something people
-                          find useful, clear, and good to look at.
+                          Mahasiswa Informatika dan full-stack developer yang senang mengubah ide menjadi produk digital yang fungsional, rapi, dan bermanfaat.
                         </p>
 
                         <p
@@ -603,9 +596,7 @@ export default function About() {
                             text-white/35
                           "
                         >
-                          Outside of coursework, I spend most of my time
-                          building web and mobile projects, and picking
-                          apart new tools to see how they work.
+                          Di luar jam kuliah, saya sering membangun aplikasi web dan mobile, serta mengeksplorasi teknologi baru.
                         </p>
                       </div>
 
@@ -627,8 +618,7 @@ export default function About() {
                         <div className="mt-5 flex flex-wrap gap-2">
 
                           {[
-                            "Frontend",
-                            "Backend",
+                            "Fullstack",
                             "Mobile",
                             "Software Development",
                           ].map((item) => (
@@ -730,7 +720,7 @@ export default function About() {
                         </h2>
 
                         <p className="mt-4 text-sm text-white/45">
-                          Informatics Engineering
+                          Teknik Informatika
                         </p>
 
                         <p
@@ -743,9 +733,10 @@ export default function About() {
                             sm:text-base
                           "
                         >
-                          Currently studying software development, web
-                          technologies, mobile development, data
-                          structures, and modern computing.
+                          Saat ini saya berfokus mendalami pengembangan perangkat lunak (web & mobile)
+                          sekaligus memperkuat fondasi struktur data dan algoritma untuk membangun aplikasi
+                          yang tidak hanya fungsional, tetapi juga efisien dan terstruktur dengan baik.
+                          
                         </p>
                       </div>
 
@@ -756,7 +747,7 @@ export default function About() {
                         {[
                           {
                             label: "Field",
-                            value: "Informatics",
+                            value: "Informatika",
                           },
                           {
                             label: "Status",
@@ -873,9 +864,9 @@ export default function About() {
                             sm:text-base
                           "
                         >
-                          Working out of Indonesia — learning, building,
-                          and keeping an eye on where technology is
-                          headed next.
+                          Berteempat di jakarta — saya berfokus untuk terus belajar,
+                          membangun produk digital yang bermanfaat,
+                          serta mengikuti perkembangan teknologi.
                         </p>
 
                         <div className="mt-12 flex items-center gap-4">
@@ -970,7 +961,7 @@ export default function About() {
                           </p>
 
                           <p className="mt-4 text-sm text-white/55">
-                            Southeast Asia
+                            Asia Tenggara
                           </p>
                         </div>
 

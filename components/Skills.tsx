@@ -9,8 +9,7 @@ import { motion } from "framer-motion";
 const skillCategories = [
   {
     title: "Frontend",
-    description:
-      "Building modern and responsive user interfaces.",
+    description: "Building modern and responsive user interfaces.",
     skills: [
       {
         name: "Next.js",
@@ -45,8 +44,7 @@ const skillCategories = [
 
   {
     title: "Backend",
-    description:
-      "Developing APIs, server-side applications, and services.",
+    description: "Developing APIs, server-side applications, and services.",
     skills: [
       {
         name: "Node.js",
@@ -69,8 +67,7 @@ const skillCategories = [
 
   {
     title: "Programming",
-    description:
-      "Programming languages I use for development and problem solving.",
+    description: "Languages I use for development and problem solving.",
     skills: [
       {
         name: "Python",
@@ -89,8 +86,7 @@ const skillCategories = [
 
   {
     title: "Mobile",
-    description:
-      "Creating cross-platform mobile applications.",
+    description: "Creating cross-platform mobile applications.",
     skills: [
       {
         name: "Flutter",
@@ -105,13 +101,8 @@ const skillCategories = [
 
   {
     title: "Database",
-    description:
-      "Managing and working with application data.",
+    description: "Managing and working with application data.",
     skills: [
-      {
-        name: "MySQL",
-        icon: "https://cdn.simpleicons.org/mysql/4479A1",
-      },
       {
         name: "PostgreSQL",
         icon: "https://cdn.simpleicons.org/postgresql/4169E1",
@@ -119,10 +110,6 @@ const skillCategories = [
       {
         name: "MongoDB",
         icon: "https://cdn.simpleicons.org/mongodb/47A248",
-      },
-      {
-        name: "Firebase",
-        icon: "https://cdn.simpleicons.org/firebase/FFCA28",
       },
       {
         name: "Supabase",
@@ -133,8 +120,7 @@ const skillCategories = [
 
   {
     title: "Tools & Design",
-    description:
-      "Tools I use for development, design, and collaboration.",
+    description: "Tools I use for development, design, and collaboration.",
     skills: [
       {
         name: "Git",
@@ -149,63 +135,10 @@ const skillCategories = [
         icon: "https://cdn.simpleicons.org/figma/F24E1E",
       },
       {
-        name: "Postman",
-        icon: "https://cdn.simpleicons.org/postman/FF6C37",
-      },
-      {
         name: "VS Code",
         icon: "https://cdn.simpleicons.org/visualstudiocode/007ACC",
       },
     ],
-  },
-];
-
-/* =========================================================
-   RANDOM POSITIONS
-========================================================= */
-
-const randomPositions = [
-  {
-    x: -80,
-    y: -60,
-    rotate: -15,
-    scale: 0.65,
-  },
-  {
-    x: 80,
-    y: -70,
-    rotate: 14,
-    scale: 0.7,
-  },
-  {
-    x: -100,
-    y: 60,
-    rotate: -18,
-    scale: 0.65,
-  },
-  {
-    x: 100,
-    y: 70,
-    rotate: 18,
-    scale: 0.7,
-  },
-  {
-    x: -50,
-    y: 90,
-    rotate: -12,
-    scale: 0.68,
-  },
-  {
-    x: 60,
-    y: -90,
-    rotate: 12,
-    scale: 0.65,
-  },
-  {
-    x: -110,
-    y: 0,
-    rotate: -20,
-    scale: 0.62,
   },
 ];
 
@@ -224,331 +157,203 @@ function CategoryCard({
     <motion.div
       initial={{
         opacity: 0,
-        y: 35,
-        scale: 0.97,
+        y: 20,
       }}
       whileInView={{
         opacity: 1,
         y: 0,
-        scale: 1,
       }}
       viewport={{
         once: true,
         amount: 0.15,
       }}
       transition={{
-        duration: 0.8,
-        delay: categoryIndex * 0.05,
+        duration: 0.5,
+        delay: categoryIndex * 0.06,
         ease: [0.22, 1, 0.36, 1],
+      }}
+      whileHover={{
+        y: -3,
       }}
       className="
         group
         relative
         overflow-hidden
-        rounded-[24px]
-
+        rounded-[22px]
         border
-        border-white/[0.08]
-
-        bg-[#1d1d1d]
-
-        p-6
-
-        shadow-[0_15px_50px_rgba(0,0,0,0.25)]
-
+        border-neutral-800
+        bg-neutral-900/40
+        p-5
         transition-all
-        duration-500
-
-        hover:border-white/[0.15]
-        hover:bg-[#202020]
+        duration-300
+        hover:border-neutral-700
+        hover:bg-neutral-900/70
       "
     >
-      {/* =====================================================
-          CARD LIGHT
-      ===================================================== */}
+      {/* Subtle glow */}
 
       <div
         className="
           pointer-events-none
           absolute
-          -right-24
-          -top-24
-          h-52
-          w-52
+          -right-16
+          -top-16
+          h-32
+          w-32
           rounded-full
-          bg-white/[0.035]
+          bg-white/[0.025]
           blur-3xl
           transition-all
-          duration-700
-          group-hover:bg-white/[0.07]
+          duration-500
+          group-hover:bg-white/[0.05]
         "
       />
-
-      {/* =====================================================
-          TOP LINE
-      ===================================================== */}
-
-      <div
-        className="
-          pointer-events-none
-          absolute
-          left-6
-          right-6
-          top-0
-          h-px
-          bg-gradient-to-r
-          from-transparent
-          via-white/[0.14]
-          to-transparent
-        "
-      />
-
-      {/* =====================================================
-          CONTENT
-      ===================================================== */}
 
       <div className="relative z-10">
 
-        {/* TITLE */}
+        {/* HEADER */}
 
-        <motion.h3
-          initial={{
-            opacity: 0,
-            y: 10,
-          }}
-          whileInView={{
-            opacity: 1,
-            y: 0,
-          }}
-          viewport={{
-            once: true,
-          }}
-          transition={{
-            duration: 0.5,
-            delay: categoryIndex * 0.05 + 0.1,
-          }}
-          className="
-            text-xl
-            font-semibold
-            tracking-tight
-            text-white
-          "
-        >
-          {category.title}
-        </motion.h3>
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <h3
+              className="
+                text-lg
+                font-semibold
+                tracking-tight
+                text-white
+              "
+            >
+              {category.title}
+            </h3>
 
-        {/* DESCRIPTION */}
+            <p
+              className="
+                mt-1
+                text-[11px]
+                leading-relaxed
+                text-neutral-500
+              "
+            >
+              {category.description}
+            </p>
+          </div>
 
-        <motion.p
-          initial={{
-            opacity: 0,
-            y: 10,
-          }}
-          whileInView={{
-            opacity: 1,
-            y: 0,
-          }}
-          viewport={{
-            once: true,
-          }}
-          transition={{
-            duration: 0.5,
-            delay: categoryIndex * 0.05 + 0.15,
-          }}
-          className="
-            mt-2
-            max-w-md
-            text-xs
-            leading-5
-            text-neutral-400
-          "
-        >
-          {category.description}
-        </motion.p>
+          <span
+            className="
+              shrink-0
+              pt-1
+              text-[9px]
+              font-medium
+              tracking-[0.2em]
+              text-neutral-600
+            "
+          >
+            {String(categoryIndex + 1).padStart(2, "0")}
+          </span>
+        </div>
 
         {/* =================================================
-            ICON AREA
-
-            IMPORTANT:
-            Animation sekarang hanya bergerak sedikit.
-            Jadi tidak ada icon yang keluar dari card.
-        ================================================= */}
+            SKILLS
+        ================================================== */}
 
         <div
           className="
-            mt-7
+            mt-5
             flex
             flex-wrap
-            items-center
-            gap-4
+            gap-2
           "
         >
-          {category.skills.map((skill, skillIndex) => {
-            const start =
-              randomPositions[
-                (skillIndex + categoryIndex) %
-                  randomPositions.length
-              ];
+          {category.skills.map((skill, skillIndex) => (
+            <motion.div
+              key={`${category.title}-${skill.name}`}
+              initial={{
+                opacity: 0,
+                scale: 0.85,
+              }}
+              whileInView={{
+                opacity: 1,
+                scale: 1,
+              }}
+              viewport={{
+                once: true,
+              }}
+              transition={{
+                duration: 0.3,
+                delay:
+                  categoryIndex * 0.06 +
+                  skillIndex * 0.035,
+              }}
+              title={skill.name}
+              className="
+                group/icon
+                relative
+                flex
+                h-12
+                w-12
+                shrink-0
+                items-center
+                justify-center
+                rounded-xl
+                border
+                border-neutral-800
+                bg-black/50
+                transition-all
+                duration-200
+                hover:-translate-y-1
+                hover:border-neutral-600
+                hover:bg-neutral-800
+              "
+            >
+              <img
+                src={skill.icon}
+                alt={skill.name}
+                draggable={false}
+                loading="lazy"
+                className="
+                  h-6
+                  w-6
+                  object-contain
+                  opacity-80
+                  transition-all
+                  duration-200
+                  group-hover/icon:scale-110
+                  group-hover/icon:opacity-100
+                "
+              />
 
-            return (
-              <motion.div
-                key={`${category.title}-${skill.name}`}
-                initial={{
-                  opacity: 0,
-                  x: start.x,
-                  y: start.y,
-                  rotate: start.rotate,
-                  scale: start.scale,
-                  filter: "blur(5px)",
-                }}
-                whileInView={{
-                  opacity: 1,
-                  x: 0,
-                  y: 0,
-                  rotate: 0,
-                  scale: 1,
-                  filter: "blur(0px)",
-                }}
-                viewport={{
-                  once: true,
-                  amount: 0.05,
-                }}
-                transition={{
-                  duration: 0.9,
-                  delay:
-                    0.2 +
-                    categoryIndex * 0.08 +
-                    skillIndex * 0.1,
-                  ease: [0.16, 1, 0.3, 1],
-                }}
-                whileHover={{
-                  y: -7,
-                  scale: 1.1,
-                  rotate: 3,
-                  transition: {
-                    duration: 0.25,
-                    ease: [0.22, 1, 0.36, 1],
-                  },
-                }}
-                className="group/icon relative"
+              {/* TOOLTIP */}
+
+              <span
+                className="
+                  pointer-events-none
+                  absolute
+                  -top-9
+                  left-1/2
+                  z-30
+                  -translate-x-1/2
+                  whitespace-nowrap
+                  rounded-md
+                  border
+                  border-neutral-800
+                  bg-neutral-950
+                  px-2
+                  py-1
+                  text-[9px]
+                  font-medium
+                  text-neutral-300
+                  opacity-0
+                  shadow-xl
+                  transition-all
+                  duration-200
+                  group-hover/icon:-translate-y-0.5
+                  group-hover/icon:opacity-100
+                "
               >
-                {/* =================================================
-                    GLOW
-                ================================================= */}
-
-                <div
-                  className="
-                    absolute
-                    -inset-3
-                    rounded-full
-                    bg-white/[0.08]
-                    opacity-0
-                    blur-xl
-                    transition-opacity
-                    duration-500
-                    group-hover/icon:opacity-100
-                  "
-                />
-
-                {/* =================================================
-                    GLASS CIRCLE
-                ================================================= */}
-
-                <div
-                  className="
-                    relative
-                    flex
-                    h-[62px]
-                    w-[62px]
-                    items-center
-                    justify-center
-
-                    overflow-hidden
-                    rounded-full
-
-                    border
-                    border-white/[0.14]
-
-                    bg-white/[0.055]
-
-                    shadow-
-                    [inset_0_1px_1px_rgba(255,255,255,0.12)]
-
-                    backdrop-blur-xl
-                    backdrop-saturate-150
-
-                    transition-all
-                    duration-500
-
-                    group-hover/icon:border-white/[0.3]
-                    group-hover/icon:bg-white/[0.1]
-                  "
-                >
-                  {/* =================================================
-                      GLASS REFLECTION
-                  ================================================= */}
-
-                  <div
-                    className="
-                      pointer-events-none
-                      absolute
-                      left-[10%]
-                      right-[10%]
-                      top-[5%]
-                      h-[45%]
-                      rounded-full
-
-                      bg-gradient-to-b
-                      from-white/[0.14]
-                      via-white/[0.04]
-                      to-transparent
-
-                      opacity-80
-                    "
-                  />
-
-                  {/* =================================================
-                      INNER BORDER
-                  ================================================= */}
-
-                  <div
-                    className="
-                      pointer-events-none
-                      absolute
-                      inset-0
-                      rounded-full
-                      ring-1
-                      ring-inset
-                      ring-white/[0.04]
-                    "
-                  />
-
-                  {/* =================================================
-                      ICON
-                  ================================================= */}
-
-                  <img
-                    src={skill.icon}
-                    alt={skill.name}
-                    draggable={false}
-                    loading="eager"
-                    className="
-                      relative
-                      z-10
-                      h-7
-                      w-7
-                      object-contain
-
-                      transition-transform
-                      duration-500
-
-                      group-hover/icon:scale-110
-                    "
-                  />
-                </div>
-              </motion.div>
-            );
-          })}
+                {skill.name}
+              </span>
+            </motion.div>
+          ))}
         </div>
       </div>
     </motion.div>
@@ -556,7 +361,7 @@ function CategoryCard({
 }
 
 /* =========================================================
-   MAIN SKILLS
+   MAIN SKILLS SECTION
 ========================================================= */
 
 export default function Skills() {
@@ -564,13 +369,10 @@ export default function Skills() {
     <section
       id="skills"
       className="
-        relative
-        overflow-hidden
         bg-black
-        py-24
+        py-20
         text-white
-
-        md:py-32
+        md:py-24
       "
     >
       <div
@@ -582,142 +384,101 @@ export default function Skills() {
         "
       >
 
-        {/* ===================================================
+        {/* =================================================
             HEADER
-        =================================================== */}
+        ================================================== */}
 
         <motion.div
           initial={{
             opacity: 0,
-            y: 40,
-            filter: "blur(10px)",
+            y: 20,
           }}
           whileInView={{
             opacity: 1,
             y: 0,
-            filter: "blur(0px)",
           }}
           viewport={{
             once: true,
-            amount: 0.2,
           }}
           transition={{
-            duration: 1,
-            ease: [0.22, 1, 0.36, 1],
+            duration: 0.55,
           }}
           className="
             flex
             flex-col
             justify-between
-            gap-8
-
+            gap-5
             md:flex-row
             md:items-end
           "
         >
-          {/* LEFT */}
-
           <div>
             <p
               className="
-                mb-5
+                mb-2
                 text-[10px]
                 font-medium
                 uppercase
-                tracking-[0.4em]
+                tracking-[0.25em]
                 text-neutral-600
               "
             >
-              03 / Skills
+              Skills
             </p>
 
             <h2
               className="
-                text-5xl
+                text-4xl
                 font-bold
                 tracking-tight
-                text-white
-
-                sm:text-6xl
-                md:text-7xl
+                sm:text-5xl
+                md:text-6xl
               "
             >
               What I work with.
             </h2>
           </div>
 
-          {/* RIGHT */}
-
           <p
             className="
-              max-w-md
-              text-sm
-              leading-7
-              text-neutral-400
-
+              max-w-sm
+              text-xs
+              leading-relaxed
+              text-neutral-500
               md:text-right
             "
           >
-            Technologies, programming languages,
-            databases, and tools I use to build
-            modern digital experiences.
+            Technologies, programming languages, databases,
+            and tools I use to build modern digital experiences.
           </p>
         </motion.div>
 
-        {/* ===================================================
-            MASONRY GRID
-        =================================================== */}
+        {/* =================================================
+            SIMPLE SKILLS GRID
+        ================================================== */}
 
-        <div className="mt-16">
+        <div
+          className="
+            mt-10
+            grid
+            grid-cols-1
+            gap-4
+            sm:grid-cols-2
+            lg:grid-cols-3
+            items-start
+          "
+        >
 
-          <div
-            className="
-              columns-1
-              gap-4
+          {skillCategories.map((category, index) => (
+            <CategoryCard
+              key={category.title}
+              category={category}
+              categoryIndex={index}
+            />
+          ))}
 
-              sm:columns-2
-
-              lg:columns-3
-            "
-          >
-            {skillCategories.map(
-              (category, categoryIndex) => (
-                <div
-                  key={category.title}
-                  className="
-                    mb-4
-                    break-inside-avoid
-                  "
-                >
-                  <CategoryCard
-                    category={category}
-                    categoryIndex={categoryIndex}
-                  />
-                </div>
-              )
-            )}
-          </div>
         </div>
       </div>
-
-      {/* =====================================================
-          LEFT EDGE
-      ===================================================== */}
-
-      <div
-        className="
-          pointer-events-none
-          absolute
-          left-0
-          top-0
-          h-full
-          w-px
-          bg-gradient-to-b
-          from-transparent
-          via-white/[0.08]
-          to-transparent
-        "
-      />
     </section>
   );
 }
