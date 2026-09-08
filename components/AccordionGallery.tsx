@@ -439,7 +439,7 @@ const AccordionGallery = ({
         return (
           <Tag
             key={i}
-            ref={(el) => {
+            ref={(el: HTMLElement | null) => {
               panelRefs.current[i] =
                 el as HTMLElement | null;
             }}

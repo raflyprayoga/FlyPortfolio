@@ -1,13 +1,13 @@
 import { useEffect, useRef } from 'react';
 import { Renderer, Program, Mesh, Triangle } from 'ogl';
 
-const hexToRgb = hex => {
+const hexToRgb = (hex: string): [number, number, number] => {
   const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
   if (!result) return [1, 1, 1];
   return [parseInt(result[1], 16) / 255, parseInt(result[2], 16) / 255, parseInt(result[3], 16) / 255];
 };
 
-const colorModeToFloat = mode => (mode === 'ember' ? 1 : mode === 'frost' ? 2 : 0);
+const colorModeToFloat = (mode: string): number => (mode === 'ember' ? 1 : mode === 'frost' ? 2 : 0);
 
 const vertex = `#version 300 es
 in vec2 position;
@@ -118,7 +118,10 @@ void main() {
 }
 `;
 
-const ctxMap = new WeakMap();
+const ctxMap = new WeakMap<
+  HTMLDivElement,
+  { renderer: Renderer; program: Program; mesh: Mesh }
+>();
 
 const MoltenMetal = ({
   color1 = '#5227FF',
@@ -143,7 +146,7 @@ const MoltenMetal = ({
   lightMode = false,
   className = ''
 }) => {
-  const containerRef = useRef(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -217,7 +220,7 @@ const MoltenMetal = ({
     const targetMouse = [0.5, 0.5];
     const currentMouse = [0.5, 0.5];
 
-    const handleMouseMove = e => {
+    const handleMouseMove = (e: MouseEvent) => {
       const rect = canvas.getBoundingClientRect();
       targetMouse[0] = (e.clientX - rect.left) / rect.width;
       targetMouse[1] = 1.0 - (e.clientY - rect.top) / rect.height;
@@ -234,7 +237,7 @@ const MoltenMetal = ({
     let isPageVisible = !document.hidden;
     const t0 = performance.now();
 
-    const loop = t => {
+    const loop = (t: number) => {
       program.uniforms.iTime.value = (t - t0) * 0.001;
       currentMouse[0] += 0.05 * (targetMouse[0] - currentMouse[0]);
       currentMouse[1] += 0.05 * (targetMouse[1] - currentMouse[1]);

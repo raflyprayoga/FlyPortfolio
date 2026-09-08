@@ -36,7 +36,7 @@ export default function Projects() {
                 md:text-7xl
               "
             >
-              Selected work.
+              Experience
             </h2>
           </div>
 
@@ -46,8 +46,7 @@ export default function Projects() {
               text-neutral-400
             "
           >
-            A collection of projects exploring development, design,
-            interaction, and problem solving.
+            Koleksi proyek tempat saya belajar, mencoba hal baru, dan merajut desain menjadi solusi yang bermanfaat
           </p>
 
         </div>

@@ -8,9 +8,6 @@ const greetings = [
   "Selamat Datang",
   "ようこそ",
   "환영합니다",
-  "欢迎",
-  "歡迎",
-  "Bienvenido",
 ];
 
 const STEP_MS = 600; // durasi tiap teks tampil (dinaikkan biar sempat kebaca)
