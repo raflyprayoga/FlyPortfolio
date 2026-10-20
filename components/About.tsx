@@ -1,1020 +1,129 @@
+
 "use client";
 
-import { useRef, useState } from "react";
-import {
-  motion,
-  AnimatePresence,
-  useScroll,
-  useTransform,
-} from "framer-motion";
+import { motion } from "framer-motion";
 
-const tabs = [
-  { id: "bio", label: "Bio" },
-  { id: "education", label: "Education" },
-  { id: "location", label: "Location" },
-] as const;
-
-type TabId = (typeof tabs)[number]["id"];
+const interests = [
+  "Web Development",
+  "Full-Stack Development",
+  "Mobile Development",
+  "Software Engineering",
+];
 
 export default function About() {
-  const [activeTab, setActiveTab] = useState<TabId>("bio");
-
-  const sectionRef = useRef<HTMLElement>(null);
-
-  /*
-  ============================================================
-  SCROLL PROGRESS
-  ============================================================
-  */
-
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "center center"],
-  });
-
-  const cardScale = useTransform(
-    scrollYProgress,
-    [0, 0.2, 0.5, 0.75, 1],
-    [0.38, 0.48, 0.68, 0.9, 1.08]
-  );
-
-  const cardY = useTransform(
-    scrollYProgress,
-    [0, 0.3, 0.6, 1],
-    [180, 100, 40, 0]
-  );
-
-  /*
-  ============================================================
-  OPACITY
-  ============================================================
-  */
-
-  const cardOpacity = useTransform(
-    scrollYProgress,
-    [0, 0.12, 0.3, 0.5],
-    [0, 0.25, 0.65, 1]
-  );
-
-  /*
-  ============================================================
-  BORDER RADIUS
-  ============================================================
-  */
-
-  const cardRadius = useTransform(
-    scrollYProgress,
-    [0, 0.5, 1],
-    [55, 35, 24]
-  );
-
-  /*
-  ============================================================
-  GLASS BLUR
-  ============================================================
-  */
-
   return (
     <section
-      ref={sectionRef}
       id="about"
-      className="
-        relative
-        overflow-hidden
-        bg-black
-        px-5
-        py-40
-        text-[#EDEDEA]
-        sm:px-6
-        lg:py-52
-      "
+      className="min-h-screen bg-black px-6 pb-10 pt-24 text-white sm:px-10 sm:pt-28 lg:px-16 lg:pb-8 lg:pt-28"
     >
-      {/* =====================================================
-          BACKGROUND
-      ====================================================== */}
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.1 }}
+        transition={{ duration: 0.45 }}
+        className="mx-auto max-w-6xl"
+      >
+        {/* Heading */}
+        <div className="mb-9">
+          <h2 className="text-4xl font-semibold leading-tight tracking-tight sm:text-5xl lg:text-6xl">
+            Hi, I’m{" "}
+            <span className="text-violet-500">
+              Rafly Prayoga.
+            </span>
+          </h2>
 
-      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+          <p className="mt-4 max-w-2xl text-sm leading-7 text-gray-400 sm:text-base">
+            Mahasiswa Teknik Informatika di Universitas
+            Tarumanagara yang memiliki ketertarikan pada
+            pengembangan aplikasi dan teknologi digital.
+          </p>
+        </div>
 
-        {/* Main glow */}
+        {/* Profile and Biography */}
+        <div className="grid items-center gap-8 md:grid-cols-[0.7fr_1.3fr] lg:grid-cols-[0.75fr_1.25fr] lg:gap-16">
+          {/* Profile Image */}
+          <motion.div
+            initial={{ opacity: 0, x: -15 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="flex justify-center md:justify-start"
+          >
+            <img
+              src="/profile.png"
+              alt="Rafly Prayoga"
+              className="h-56 w-48 object-cover object-top grayscale transition duration-500 hover:grayscale-0 sm:h-64 sm:w-52 lg:h-72 lg:w-60"
+            />
+          </motion.div>
 
-        <div
-          className="
-            absolute
-            left-1/2
-            top-[-250px]
-            h-[600px]
-            w-[900px]
-            -translate-x-1/2
-            rounded-full
-            bg-white/[0.035]
-            blur-[200px]
-          "
-        />
+          {/* About Text */}
+          <div>
+            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-violet-500">
+              Tentang Saya
+            </p>
 
-        {/* Center glow */}
+            <p className="text-sm leading-7 text-gray-400 sm:text-base">
+              Saya senang mempelajari teknologi baru dan
+              mengembangkan ide menjadi aplikasi yang fungsional
+              serta memiliki desain yang menarik. Saya terus
+              meningkatkan kemampuan pemrograman melalui
+              pembelajaran dan pengerjaan berbagai proyek.
+            </p>
 
-        <div
-          className="
-            absolute
-            left-1/2
-            top-1/2
-            h-[600px]
-            w-[800px]
-            -translate-x-1/2
-            -translate-y-1/2
-            rounded-full
-            bg-white/[0.02]
-            blur-[200px]
-          "
-        />
-
-        {/* Bottom glow */}
-
-        <div
-          className="
-            absolute
-            bottom-[-300px]
-            left-1/2
-            h-[500px]
-            w-[800px]
-            -translate-x-1/2
-            rounded-full
-            bg-white/[0.02]
-            blur-[180px]
-          "
-        />
-
-        {/* Gradient */}
-
-        <div
-          className="
-            absolute
-            inset-0
-            bg-gradient-to-b
-            from-black
-            via-[#040404]
-            to-black
-          "
-        />
-
-        {/* Grid */}
-
-        <div
-          className="
-            absolute
-            inset-0
-            opacity-[0.025]
-            [background-image:linear-gradient(rgba(255,255,255,0.15)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.15)_1px,transparent_1px)]
-            [background-size:80px_80px]
-          "
-        />
-      </div>
-
-      {/* =====================================================
-          CONTENT
-      ====================================================== */}
-
-      <div className="relative z-10 mx-auto max-w-7xl">
-
-
-        {/* =================================================
-            GLASS CARD
-        ================================================== */}
-
-        <motion.div
-          style={{
-            scale: cardScale,
-            y: cardY,
-            opacity: cardOpacity,
-            borderRadius: cardRadius,
-          }}
-          className="
-            relative
-            min-h-[590px]
-            w-full
-            origin-center
-            overflow-hidden
-
-            border
-            border-white/[0.15]
-
-            bg-white/[0.035]
-
-            shadow-[0_40px_120px_rgba(0,0,0,0.75)]
-
-            backdrop-blur-[35px]
-            backdrop-saturate-150
-
-            will-change-transform
-          "
-        >
-
-          {/* =================================================
-              GLASS TOP EDGE
-          ================================================== */}
-
-          <div
-            className="
-              pointer-events-none
-              absolute
-              left-0
-              right-0
-              top-0
-              h-px
-              bg-gradient-to-r
-              from-transparent
-              via-white/60
-              to-transparent
-            "
-          />
-
-          {/* =================================================
-              GLASS LIGHT REFLECTION
-          ================================================== */}
-
-          <div
-            className="
-              pointer-events-none
-              absolute
-              -top-[55%]
-              left-[5%]
-              h-[90%]
-              w-[75%]
-              rotate-[-15deg]
-              bg-gradient-to-b
-              from-white/[0.10]
-              via-white/[0.025]
-              to-transparent
-              blur-[45px]
-            "
-          />
-
-          {/* Secondary reflection */}
-
-          <div
-            className="
-              pointer-events-none
-              absolute
-              -right-[20%]
-              top-[10%]
-              h-[80%]
-              w-[40%]
-              rotate-[15deg]
-              bg-white/[0.015]
-              blur-[70px]
-            "
-          />
-
-          {/* =================================================
-              INNER GLASS BORDER
-          ================================================== */}
-
-          <div
-            className="
-              pointer-events-none
-              absolute
-              inset-[1px]
-              rounded-[inherit]
-              border
-              border-white/[0.035]
-            "
-          />
-
-          {/* =================================================
-              MAIN LAYOUT
-          ================================================== */}
-
-          <div className="relative flex min-h-[590px] flex-col md:flex-row">
-
-            {/* =================================================
-                SIDEBAR
-            ================================================== */}
-
-            <aside
-              className="
-                relative
-                flex
-                w-full
-                shrink-0
-                flex-col
-
-                border-b
-                border-white/[0.08]
-
-                bg-white/[0.018]
-
-                p-6
-
-                md:w-[240px]
-                md:border-b-0
-                md:border-r
-                md:p-7
-              "
-            >
-
-              {/* Glass sidebar line */}
-
-              <div
-                className="
-                  pointer-events-none
-                  absolute
-                  bottom-0
-                  right-0
-                  top-0
-                  hidden
-                  w-px
-                  bg-gradient-to-b
-                  from-transparent
-                  via-white/10
-                  to-transparent
-                  md:block
-                "
-              />
-
-              <p
-                className="
-                  text-[10px]
-                  uppercase
-                  tracking-[0.3em]
-                  text-white/30
-                "
-              >
-                Sections
+            {/* Interests */}
+            <div className="mt-6">
+              <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-violet-500">
+                Areas of Interest
               </p>
 
-              <div className="mt-5 h-px w-full bg-white/[0.07]" />
-
-              {/* Tabs */}
-
-              <nav className="mt-5 flex flex-row gap-2 md:flex-col md:gap-1.5">
-                {tabs.map((tab) => {
-                  const isActive = activeTab === tab.id;
-
-                  return (
-                    <button
-                      key={tab.id}
-                      onClick={() => setActiveTab(tab.id)}
-                      className={`
-                        group
-                        relative
-                        flex
-                        flex-1
-                        items-center
-                        overflow-hidden
-                        rounded-xl
-                        px-4
-                        py-4
-                        text-left
-                        transition-all
-                        duration-300
-
-                        md:flex-none
-
-                        ${
-                          isActive
-                            ? "bg-white/[0.075] text-white shadow-[inset_0_0_30px_rgba(255,255,255,0.025)]"
-                            : "text-white/35 hover:bg-white/[0.035] hover:text-white/70"
-                        }
-                      `}
-                    >
-
-                      {/* Active indicator */}
-
-                      {isActive && (
-                        <motion.span
-                          layoutId="activeAboutIndicator"
-                          className="
-                            absolute
-                            bottom-0
-                            left-0
-                            top-0
-                            w-[2px]
-                            bg-white
-                            shadow-[0_0_14px_rgba(255,255,255,0.7)]
-                          "
-                          transition={{
-                            type: "spring",
-                            stiffness: 400,
-                            damping: 30,
-                          }}
-                        />
-                      )}
-
-                      <span className="text-sm font-medium">
-                        {tab.label}
-                      </span>
-                    </button>
-                  );
-                })}
-              </nav>
-
-              {/* Sidebar bottom */}
-
-              <div className="mt-auto hidden border-t border-white/[0.07] pt-6 md:block">
-
-                <div className="flex items-center gap-2">
-
+              <div className="flex flex-wrap gap-x-4 gap-y-2">
+                {interests.map((interest) => (
                   <span
-                    className="
-                      h-1.5
-                      w-1.5
-                      rounded-full
-                      bg-white
-                      shadow-[0_0_8px_rgba(255,255,255,0.5)]
-                    "
-                  />
-
-                  <span
-                    className="
-                      text-[10px]
-                      uppercase
-                      tracking-[0.25em]
-                      text-white/30
-                    "
+                    key={interest}
+                    className="text-xs text-gray-300 transition-colors duration-200 hover:text-purple-400 sm:text-sm"
                   >
-                    Profile
+                    <span className="mr-2 text-violet-500">•</span>
+                    {interest}
                   </span>
-                </div>
-
-                <p className="mt-3 text-[12px] leading-5 text-white/30">
-                  Developer dan mahasiswa yang fokus mewujudkan ide menjadi app dan web.
-                </p>
+                ))}
               </div>
-            </aside>
-
-            {/* =================================================
-                CONTENT
-            ================================================== */}
-
-            <main className="relative min-w-0 flex-1 p-7 sm:p-10 lg:p-14">
-
-              <AnimatePresence mode="wait">
-
-                {/* =================================================
-                    BIO
-                ================================================== */}
-
-                {activeTab === "bio" && (
-                  <motion.div
-                    key="bio"
-                    initial={{
-                      opacity: 0,
-                      y: 20,
-                      filter: "blur(10px)",
-                    }}
-                    animate={{
-                      opacity: 1,
-                      y: 0,
-                      filter: "blur(0px)",
-                    }}
-                    exit={{
-                      opacity: 0,
-                      y: -15,
-                      filter: "blur(8px)",
-                    }}
-                    transition={{
-                      duration: 0.5,
-                    }}
-                    className="flex h-full flex-col"
-                  >
-
-                    {/* Profile */}
-
-                    <div className="flex flex-col gap-8 sm:flex-row sm:items-center">
-
-                      {/* PHOTO */}
-
-                      <div
-                        className="
-                          group
-                          relative
-                          h-40
-                          w-40
-                          shrink-0
-                          overflow-hidden
-                          rounded-2xl
-                          border
-                          border-white/[0.15]
-                          bg-white/[0.04]
-                          shadow-2xl
-                          sm:h-48
-                          sm:w-48
-                        "
-                      >
-                        <img
-                          src="/profile.png"
-                          alt="Rafly Prayoga"
-                          className="
-                            h-full
-                            w-full
-                            object-cover
-                            grayscale
-                            transition-all
-                            duration-700
-                            group-hover:scale-105
-                            group-hover:grayscale-0
-                          "
-                        />
-
-                        <div
-                          className="
-                            pointer-events-none
-                            absolute
-                            inset-0
-                            bg-gradient-to-br
-                            from-white/[0.12]
-                            via-transparent
-                            to-black/40
-                          "
-                        />
-
-                        <div
-                          className="
-                            pointer-events-none
-                            absolute
-                            left-0
-                            right-0
-                            top-0
-                            h-px
-                            bg-white/40
-                          "
-                        />
-                      </div>
-
-                      {/* INFO */}
-
-                      <div>
-                        <h2
-                          className="
-                            mt-4
-                            font-serif
-                            text-4xl
-                            font-medium
-                            tracking-tight
-                            text-white
-                            sm:text-5xl
-                            lg:text-6xl
-                          "
-                        >
-                          Rafly Prayoga
-                        </h2>
-
-                        <p className="mt-4 text-sm text-white/40">
-                          Mahasiswa informatika dan developer
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* Divider */}
-
-                    <div className="my-12 h-px w-full bg-white/[0.07]" />
-
-                    {/* Text */}
-
-                    <div className="grid gap-12 lg:grid-cols-[1fr_240px]">
-
-                      <div>
-
-                        <p
-                          className="
-                            max-w-2xl
-                            text-sm
-                            leading-8
-                            text-white/65
-                            sm:text-base
-                          "
-                        >
-                          Mahasiswa Informatika dan full-stack developer yang senang mengubah ide menjadi produk digital yang fungsional, rapi, dan bermanfaat.
-                        </p>
-
-                        <p
-                          className="
-                            mt-6
-                            max-w-2xl
-                            text-sm
-                            leading-8
-                            text-white/35
-                          "
-                        >
-                          Di luar jam kuliah, saya sering membangun aplikasi web dan mobile, serta mengeksplorasi teknologi baru.
-                        </p>
-                      </div>
-
-                      {/* Focus */}
-
-                      <div>
-
-                        <p
-                          className="
-                            text-[10px]
-                            uppercase
-                            tracking-[0.25em]
-                            text-white/30
-                          "
-                        >
-                          Focus areas
-                        </p>
-
-                        <div className="mt-5 flex flex-wrap gap-2">
-
-                          {[
-                            "Fullstack",
-                            "Mobile",
-                            "Software Development",
-                          ].map((item) => (
-                            <span
-                              key={item}
-                              className="
-                                rounded-full
-                                border
-                                border-white/[0.1]
-                                bg-white/[0.035]
-                                px-4
-                                py-2.5
-                                text-xs
-                                text-white/45
-                                backdrop-blur-md
-                                transition-all
-                                duration-300
-                                hover:border-white/20
-                                hover:bg-white/[0.07]
-                                hover:text-white
-                              "
-                            >
-                              {item}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  </motion.div>
-                )}
-
-                {/* =================================================
-                    EDUCATION
-                ================================================== */}
-
-                {activeTab === "education" && (
-                  <motion.div
-                    key="education"
-                    initial={{
-                      opacity: 0,
-                      y: 20,
-                      filter: "blur(10px)",
-                    }}
-                    animate={{
-                      opacity: 1,
-                      y: 0,
-                      filter: "blur(0px)",
-                    }}
-                    exit={{
-                      opacity: 0,
-                      y: -15,
-                      filter: "blur(8px)",
-                    }}
-                    transition={{
-                      duration: 0.5,
-                    }}
-                  >
-                    <div className="max-w-4xl">
-
-                      <div className="relative border-l border-white/[0.09] pl-9">
-
-                        <div
-                          className="
-                            absolute
-                            -left-[5px]
-                            top-1
-                            h-2
-                            w-2
-                            rounded-full
-                            bg-white
-                            shadow-[0_0_10px_rgba(255,255,255,0.6)]
-                          "
-                        />
-
-                        <p
-                          className="
-                            text-[10px]
-                            font-medium
-                            uppercase
-                            tracking-[0.2em]
-                            text-white/45
-                          "
-                        >
-                          2023 — Present
-                        </p>
-
-                        <h2
-                          className="
-                            mt-5
-                            font-serif
-                            text-4xl
-                            font-medium
-                            tracking-tight
-                            text-white
-                            sm:text-5xl
-                          "
-                        >
-                          Universitas Tarumanagara
-                        </h2>
-
-                        <p className="mt-4 text-sm text-white/45">
-                          Teknik Informatika
-                        </p>
-
-                        <p
-                          className="
-                            mt-8
-                            max-w-2xl
-                            text-sm
-                            leading-8
-                            text-white/35
-                            sm:text-base
-                          "
-                        >
-                          Saat ini saya berfokus mendalami pengembangan perangkat lunak (web & mobile)
-                          sekaligus memperkuat fondasi struktur data dan algoritma untuk membangun aplikasi
-                          yang tidak hanya fungsional, tetapi juga efisien dan terstruktur dengan baik.
-                          
-                        </p>
-                      </div>
-
-                      {/* Stats */}
-
-                      <div className="mt-14 grid grid-cols-2 gap-3 sm:grid-cols-3">
-
-                        {[
-                          {
-                            label: "Field",
-                            value: "Informatika",
-                          },
-                          {
-                            label: "Status",
-                            value: "Student",
-                          },
-                          {
-                            label: "Since",
-                            value: "2023",
-                          },
-                        ].map((stat, index) => (
-                          <div
-                            key={stat.label}
-                            className={`
-                              rounded-2xl
-                              border
-                              border-white/[0.09]
-                              bg-white/[0.025]
-                              p-6
-                              backdrop-blur-xl
-                              transition-all
-                              duration-300
-                              hover:bg-white/[0.05]
-
-                              ${
-                                index === 2
-                                  ? "col-span-2 sm:col-span-1"
-                                  : ""
-                              }
-                            `}
-                          >
-                            <p
-                              className="
-                                text-[10px]
-                                uppercase
-                                tracking-[0.2em]
-                                text-white/25
-                              "
-                            >
-                              {stat.label}
-                            </p>
-
-                            <p className="mt-4 text-sm font-medium text-white/70">
-                              {stat.value}
-                            </p>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </motion.div>
-                )}
-
-                {/* =================================================
-                    LOCATION
-                ================================================== */}
-
-                {activeTab === "location" && (
-                  <motion.div
-                    key="location"
-                    initial={{
-                      opacity: 0,
-                      y: 20,
-                      filter: "blur(10px)",
-                    }}
-                    animate={{
-                      opacity: 1,
-                      y: 0,
-                      filter: "blur(0px)",
-                    }}
-                    exit={{
-                      opacity: 0,
-                      y: -15,
-                      filter: "blur(8px)",
-                    }}
-                    transition={{
-                      duration: 0.5,
-                    }}
-                  >
-                    <div className="grid gap-12 lg:grid-cols-[1fr_280px]">
-
-                      <div>
-
-                        <p
-                          className="
-                            text-[10px]
-                            uppercase
-                            tracking-[0.25em]
-                            text-white/30
-                          "
-                        >
-                          Currently based in
-                        </p>
-
-                        <h2
-                          className="
-                            mt-6
-                            font-serif
-                            text-6xl
-                            font-medium
-                            tracking-tight
-                            text-white
-                            sm:text-7xl
-                          "
-                        >
-                          Jakarta
-                        </h2>
-
-                        <p
-                          className="
-                            mt-7
-                            max-w-xl
-                            text-sm
-                            leading-8
-                            text-white/40
-                            sm:text-base
-                          "
-                        >
-                          Berteempat di jakarta — saya berfokus untuk terus belajar,
-                          membangun produk digital yang bermanfaat,
-                          serta mengikuti perkembangan teknologi.
-                        </p>
-
-                        <div className="mt-12 flex items-center gap-4">
-
-                          <span
-                            className="
-                              flex
-                              h-11
-                              w-11
-                              items-center
-                              justify-center
-                              rounded-full
-                              border
-                              border-white/[0.12]
-                              bg-white/[0.04]
-                              backdrop-blur-md
-                            "
-                          >
-                            <span
-                              className="
-                                h-2
-                                w-2
-                                rounded-full
-                                bg-white
-                                shadow-[0_0_10px_rgba(255,255,255,0.6)]
-                              "
-                            />
-                          </span>
-
-                          <div>
-
-                            <p
-                              className="
-                                text-[10px]
-                                uppercase
-                                tracking-[0.2em]
-                                text-white/25
-                              "
-                            >
-                              Open to
-                            </p>
-
-                            <p className="mt-1 text-sm text-white/60">
-                              Collaboration & projects
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Location Info */}
-
-                      <div
-                        className="
-                          overflow-hidden
-                          rounded-2xl
-                          border
-                          border-white/[0.09]
-                          bg-white/[0.025]
-                          backdrop-blur-xl
-                        "
-                      >
-
-                        <div className="p-7">
-
-                          <p
-                            className="
-                              text-[10px]
-                              uppercase
-                              tracking-[0.2em]
-                              text-white/25
-                            "
-                          >
-                            Timezone
-                          </p>
-
-                          <p className="mt-4 text-xl font-medium text-white/80">
-                            GMT +7
-                          </p>
-                        </div>
-
-                        <div className="border-t border-white/[0.08] p-7">
-
-                          <p
-                            className="
-                              text-[10px]
-                              uppercase
-                              tracking-[0.2em]
-                              text-white/25
-                            "
-                          >
-                            Region
-                          </p>
-
-                          <p className="mt-4 text-sm text-white/55">
-                            Asia Tenggara
-                          </p>
-                        </div>
-
-                        <div className="border-t border-white/[0.08] p-7">
-
-                          <p
-                            className="
-                              text-[10px]
-                              uppercase
-                              tracking-[0.2em]
-                              text-white/25
-                            "
-                          >
-                            Availability
-                          </p>
-
-                          <p className="mt-4 text-sm text-white/60">
-                            Open for opportunities
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </main>
+            </div>
           </div>
-        </motion.div>
+        </div>
 
-        {/* Bottom hint */}
+        {/* Education and Location */}
+        <div className="mt-10 border-t border-white/10 pt-7 sm:mt-12 sm:pt-8">
+          <div className="grid gap-7 sm:grid-cols-2 sm:gap-10">
+            <div>
+              <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.22em] text-violet-500">
+                Education
+              </p>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{
-            delay: 0.6,
-            duration: 0.8,
-          }}
-          className="mt-8 flex justify-end"
-        >
-          <span
-            className="
-              text-[9px]
-              uppercase
-              tracking-[0.3em]
-              text-white/20
-            "
-          >
-            Scroll to explore
-          </span>
-        </motion.div>
-      </div>
+              <h3 className="text-lg font-semibold sm:text-xl">
+                Universitas Tarumanagara
+              </h3>
+
+              <p className="mt-1 text-sm text-gray-400">
+                Teknik Informatika
+              </p>
+
+              <p className="mt-1 text-xs text-gray-500">
+                2024 — Sekarang
+              </p>
+            </div>
+
+            <div>
+              <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.22em] text-violet-500">
+                Location
+              </p>
+
+              <h3 className="text-lg font-semibold sm:text-xl">
+                Jakarta, Indonesia
+              </h3>
+            </div>
+          </div>
+        </div>
+      </motion.div>
     </section>
   );
 }

@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState } from "react";
@@ -7,6 +8,7 @@ import {
   Code2,
   ExternalLink,
   Send,
+  Mail,
 } from "lucide-react";
 
 export default function Contact() {
@@ -19,13 +21,13 @@ export default function Contact() {
 
   const socials = [
     {
-      name: "GitHub 1",
+      name: "GitHub",
       username: "@rflypryg",
       href: "https://github.com/rflypryg",
       icon: Code2,
     },
     {
-      name: "GitHub 2",
+      name: "GitHub",
       username: "@raflyprayoga",
       href: "https://github.com/raflyprayoga",
       icon: Code2,
@@ -47,206 +49,235 @@ export default function Contact() {
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const subject = encodeURIComponent(`Pesan dari ${formData.name}`);
+
+    const subject = encodeURIComponent(
+      `Pesan dari ${formData.name}`
+    );
+
     const body = encodeURIComponent(
       `Nama: ${formData.name}\nEmail: ${formData.email}\nTelepon: ${formData.phone}\n\nPesan:\n${formData.message}`
     );
-    window.location.href = `mailto:raflyzadam43@gmail.com?subject=${subject}&body=${body}`;
+
+    window.location.href =
+      `mailto:raflyzadam43@gmail.com?subject=${subject}&body=${body}`;
   };
+
+  const inputClass =
+    "w-full border-b border-white/15 bg-transparent px-0 py-3 text-sm text-white placeholder:text-gray-500 outline-none transition-colors duration-300 focus:border-violet-500";
 
   return (
     <section
       id="contact"
-      className="
-        relative
-        flex
-        min-h-screen
-        w-full
-        flex-col
-        items-center
-        justify-center
-        bg-black
-        px-6
-        py-12
-        font-sans
-        text-white
-        md:px-12
-      "
+      className="min-h-screen bg-black px-6 pb-8 pt-24 text-white sm:px-10 sm:pt-28 lg:px-16 lg:pb-8"
     >
-      <div className="mx-auto flex h-full w-full max-w-6xl flex-col justify-center">
-        {/* Content Utama Grid (Tepat di Tengah) */}
-        <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-16">
-          {/* SISI KIRI: Judul, Deskripsi Ringkas, Sosmed */}
-          <div className="space-y-5">
-            <h2 className="text-4xl font-black uppercase leading-[0.9] tracking-[-0.06em] text-white sm:text-5xl md:text-6xl">
-              Mari buat
-              <br />
-              sesuatu yang
-              <br />
-              <span className="text-neutral-500">hebat.</span>
-            </h2>
+      <div className="mx-auto max-w-6xl">
+        {/* Heading */}
+        <div className="mb-10">
+          <h2 className="text-4xl font-semibold leading-tight tracking-tight sm:text-5xl lg:text-6xl">
+            Mari buat sesuatu
+            <br />
+            yang{" "}
+            <span className="text-violet-500">hebat.</span>
+          </h2>
 
-            <p className="max-w-md text-xs leading-relaxed text-neutral-400 md:text-sm">
-              Punya ide, proyek, atau tawaran kerja sama? Mari diskusi dan buat
-              karya menarik bersama.
+          <p className="mt-4 max-w-xl text-sm leading-7 text-gray-400 sm:text-base">
+            Punya ide, proyek, atau tawaran kerja sama?
+            Hubungi saya dan mari ciptakan sesuatu yang
+            bermanfaat bersama.
+          </p>
+        </div>
+
+        {/* Contact Content */}
+        <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
+          {/* Social Links */}
+          <div>
+            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-violet-500">
+              Temukan Saya
             </p>
 
-            {/* Sosmed */}
-            <div className="pt-1">
-              <p className="mb-2 font-mono text-[9px] font-semibold uppercase tracking-[0.2em] text-neutral-400">
-                Temukan Saya
+            <div>
+              {socials.map((social) => {
+                const Icon = social.icon;
+
+                return (
+                  <a
+                    key={`${social.name}-${social.username}`}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex items-center justify-between border-b border-white/10 py-4 transition-colors hover:border-violet-500/50"
+                  >
+                    <div className="flex items-center gap-4">
+                      <Icon
+                        size={18}
+                        strokeWidth={1.5}
+                        className="text-gray-400 transition-colors group-hover:text-violet-500"
+                      />
+
+                      <div>
+                        <p className="text-sm font-medium text-white">
+                          {social.name}
+                        </p>
+
+                        <p className="mt-1 text-xs text-gray-500">
+                          {social.username}
+                        </p>
+                      </div>
+                    </div>
+
+                    <ArrowUpRight
+                      size={16}
+                      strokeWidth={1.5}
+                      className="text-gray-500 transition-all group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-violet-500"
+                    />
+                  </a>
+                );
+              })}
+            </div>
+
+            {/* Email */}
+            <div className="mt-7">
+              <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-violet-500">
+                Email
               </p>
 
-              <div className="space-y-2">
-                {socials.map((social) => {
-                  const Icon = social.icon;
+              <a
+                href="mailto:raflyzadam43@gmail.com"
+                className="group inline-flex items-center gap-3 text-sm text-gray-300 transition-colors hover:text-violet-400"
+              >
+                <Mail
+                  size={17}
+                  strokeWidth={1.5}
+                  className="text-violet-500"
+                />
 
-                  return (
-                    <a
-                      key={social.name}
-                      href={social.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="
-                        group
-                        flex
-                        items-center
-                        justify-between
-                        border
-                        border-neutral-800
-                        bg-neutral-900/50
-                        px-3.5
-                        py-2.5
-                        transition-all
-                        duration-200
-                        hover:border-neutral-700
-                        hover:bg-neutral-900
-                      "
-                    >
-                      <div className="flex items-center gap-3">
-                        <div className="flex h-7 w-7 items-center justify-center rounded-full border border-neutral-800 bg-black">
-                          <Icon size={13} strokeWidth={1.5} />
-                        </div>
-                        <div>
-                          <p className="font-mono text-[11px] font-bold uppercase tracking-[0.12em] text-white">
-                            {social.name}
-                          </p>
-                          <p className="text-[9px] text-neutral-400">
-                            {social.username}
-                          </p>
-                        </div>
-                      </div>
+                raflyzadam43@gmail.com
 
-                      <ArrowUpRight
-                        size={14}
-                        strokeWidth={1.5}
-                        className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                      />
-                    </a>
-                  );
-                })}
-              </div>
+                <ArrowUpRight
+                  size={15}
+                  className="text-gray-500 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                />
+              </a>
             </div>
           </div>
 
-          {/* SISI KANAN: Form Kontak */}
-          <div className="w-full">
-            <form onSubmit={handleSubmit} className="space-y-3">
-              {/* YOUR NAME */}
+          {/* Contact Form */}
+          <div>
+            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-violet-500">
+              Kirim Pesan
+            </p>
+
+            <form onSubmit={handleSubmit} className="space-y-4">
               <div>
+                <label
+                  htmlFor="contact-name"
+                  className="mb-1 block text-xs text-gray-400"
+                >
+                  Nama Lengkap
+                </label>
+
                 <input
+                  id="contact-name"
                   type="text"
                   name="name"
-                  placeholder="YOUR NAME"
+                  placeholder="Masukkan nama kamu"
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full border border-neutral-800 bg-neutral-900/50 px-4 py-3 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-white placeholder-neutral-500 outline-none transition duration-200 focus:border-white focus:bg-neutral-900"
+                  className={inputClass}
                 />
               </div>
 
-              {/* EMAIL ADDRESS */}
               <div>
+                <label
+                  htmlFor="contact-email"
+                  className="mb-1 block text-xs text-gray-400"
+                >
+                  Email
+                </label>
+
                 <input
+                  id="contact-email"
                   type="email"
                   name="email"
-                  placeholder="EMAIL ADDRESS"
+                  placeholder="nama@email.com"
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full border border-neutral-800 bg-neutral-900/50 px-4 py-3 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-white placeholder-neutral-500 outline-none transition duration-200 focus:border-white focus:bg-neutral-900"
+                  className={inputClass}
                 />
               </div>
 
-              {/* TELEPHONE NUMBER */}
               <div>
+                <label
+                  htmlFor="contact-phone"
+                  className="mb-1 block text-xs text-gray-400"
+                >
+                  Nomor Telepon{" "}
+                  <span className="text-gray-600">
+                    (Opsional)
+                  </span>
+                </label>
+
                 <input
+                  id="contact-phone"
                   type="tel"
                   name="phone"
-                  placeholder="TELEPHONE NUMBER"
+                  placeholder="+62 ..."
                   value={formData.phone}
                   onChange={handleChange}
-                  className="w-full border border-neutral-800 bg-neutral-900/50 px-4 py-3 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-white placeholder-neutral-500 outline-none transition duration-200 focus:border-white focus:bg-neutral-900"
+                  className={inputClass}
                 />
               </div>
 
-              {/* YOUR MESSAGE */}
               <div>
+                <label
+                  htmlFor="contact-message"
+                  className="mb-1 block text-xs text-gray-400"
+                >
+                  Pesan
+                </label>
+
                 <textarea
+                  id="contact-message"
                   name="message"
-                  rows={4}
-                  placeholder="YOUR MESSAGE"
+                  rows={3}
+                  placeholder="Ceritakan ide atau pesan kamu..."
                   value={formData.message}
                   onChange={handleChange}
                   required
-                  className="w-full resize-none border border-neutral-800 bg-neutral-900/50 px-4 py-3 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-white placeholder-neutral-500 outline-none transition duration-200 focus:border-white focus:bg-neutral-900"
+                  className={`${inputClass} resize-none`}
                 />
               </div>
 
-              {/* SEND MESSAGE BUTTON */}
               <button
                 type="submit"
-                className="
-                  group
-                  flex
-                  w-full
-                  items-center
-                  justify-center
-                  gap-2
-                  border
-                  border-white
-                  bg-white
-                  px-6
-                  py-3.5
-                  font-mono
-                  text-[10px]
-                  font-bold
-                  uppercase
-                  tracking-[0.2em]
-                  text-black
-                  transition-all
-                  duration-200
-                  hover:bg-black
-                  hover:text-white
-                "
+                className="group flex w-full items-center justify-center gap-3 bg-violet-600 px-6 py-3.5 text-xs font-semibold uppercase tracking-[0.15em] text-white transition-colors hover:bg-violet-500"
               >
-                <span>SEND MESSAGE</span>
-                <Send size={13} strokeWidth={2} />
+                Kirim Pesan
+
+                <Send
+                  size={14}
+                  className="transition-transform group-hover:translate-x-1"
+                />
               </button>
             </form>
           </div>
         </div>
-      </div>
 
-      {/* Teks Paling Bawah Tanpa Garis */}
-      <div className="absolute bottom-6 left-0 right-0 flex items-center justify-between px-6 text-[9px] uppercase tracking-[0.2em] text-neutral-500 md:px-12">
-        <span>Rafly Prayoga</span>
-        <span>Mari buat sesuatu yang bermanfaat.</span>
+        {/* Footer */}
+        <footer className="mt-12 flex flex-col gap-3 border-t border-white/10 pt-5 text-[10px] uppercase tracking-[0.2em] text-gray-500 sm:flex-row sm:items-center sm:justify-between">
+          <span>Rafly Prayoga</span>
+          <span>Mari buat sesuatu yang bermanfaat.</span>
+        </footer>
       </div>
     </section>
   );
